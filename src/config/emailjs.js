@@ -5,7 +5,7 @@ export const sendContactEmail = async (formData) => {
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     // În producție, aici ar fi API-ul real
-    const response = await fetch("https://formspree.io/f/xdkogkpw", {
+    const response = await fetch("https://formspree.io/f/xandwobv", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
