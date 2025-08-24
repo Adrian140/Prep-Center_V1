@@ -4,252 +4,43 @@ import { useAdminAuth } from '../../contexts/AdminAuthContext';
 
 function SimpleAdminPanel() {
   const { adminLogout } = useAdminAuth();
-  const [activeTab, setActiveTab] = useState('content');
+  const [activeTab, setActiveTab] = useState('navigation');
   const [message, setMessage] = useState('');
   
   // Stare pentru tot conținutul site-ului
- const [content, setContent] = useState({
-     // Hero Section
-   heroTitle: 'Prep Center France – 24h Turnaround to Amazon FBA',
-    heroSubtitle: 'Reception, quality control, FNSKU labeling, polybagging & fast shipping to EU Amazon FCs.',
-     
+  const [content, setContent] = useState({
     // Contact Info
-   phone: '+33 6 75 11 62 18',
-    email: 'contact@prep-center.eu',
-    address: '35350 La Gouesnière, France',
-    whatsappLink: 'https://wa.me/33675116218',
-     calendlyLink: 'https://calendly.com/global-fulfill-hub',
+    phone: "+33 6 75 11 62 18",
+    email: "contact@prep-center.eu", 
+    address: "35350 La Gouesnière, France",
+    whatsappLink: "https://wa.me/33675116218",
+    logoUrl: "https://i.postimg.cc/30D2w6bm/logo.png",
     
-    // Pricing
-    fnSkuStandard: '€0.50',
-    fnSkuNewCustomer: '€0.45',
-    fbmStarter: '€1.20',
-    fbmGrowth: '€1.10',
-    fbmEnterprise: '€0.95',
-    storagePerPallet: '€15',
-    climateControlled: '+€5',
+    // Navigation
+    homeNav: "Accueil",
+    servicesNav: "Services et Tarifs",
+    aboutNav: "À Propos",
+    contactNav: "Contact",
     
-    // Services Page Content
-    standardFBATitle: 'Standard FBA Services',
-    standardFBASubtitle: 'Complete prep solution with everything included',
-    fnSkuLabelingTitle: 'FNSKU Labeling Service',
-    privateLabelTitle: 'Private Label & Multi-Platform Services',
-    privateLabelSubtitle: 'Complete fulfillment solutions for Amazon, eBay, Shopify and custom websites',
-    fbmShippingTitle: 'FBM Shipping Rates',
-    fbmShippingSubtitle: 'Competitive rates based on your monthly volume',
-    storageTitle: 'Storage Solutions',
-    storageSubtitle: 'Secure and affordable storage for your inventory',
+    // Buttons
+    getQuoteBtn: "Obtenir un Devis",
+    whatsappBtn: "Chat WhatsApp",
+    bookZoomBtn: "Réserver Zoom",
     
-    // About Page Content
-    aboutTitle: 'Reliable French Prep Center for European Sellers',
-    aboutSubtitle: 'Founded by Adrian Bucur, 4+ years Amazon experience. We handle end-to-end FBA prep.',
-    ourStoryP1: 'Prep Center France was founded with a simple mission: to provide European Amazon sellers with reliable, fast, and professional FBA preparation services.',
-    ourStoryP2: 'Our founder, Adrian Bucur, brings over 4 years of hands-on Amazon FBA experience.',
-    ourStoryP3: 'Today, we handle hundreds of orders monthly across multiple platforms including Amazon FBA/FBM, eBay, Shopify, and custom websites.',
-    ourStoryP4: 'We believe in building long-term partnerships with our clients, providing not just prep services but also Private Label consultation.',
-    
-    // Contact Page Content
-    contactTitle: 'Get In Touch',
-    contactSubtitle: 'Ready to streamline your FBA operations? Contact our team today for a personalized consultation.'
- });
+    // Links
+    zoomLink: "https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
+  });
 
   const tabs = [
-     { id: 'content', label: 'Conținut Site', icon: FileText },
-   { id: 'pricing', label: 'Prețuri', icon: DollarSign },
-    { id: 'settings', label: 'Setări', icon: Settings }
+    { id: 'navigation', label: 'Navigație și Butoane', icon: Settings }
   ];
 
-   const handleSaveAll = () => {
-   // În implementarea reală, aici ai salva în baza de date
+  const handleSaveAll = () => {
+    // În implementarea reală, aici ai salva în baza de date
     localStorage.setItem('adminContent', JSON.stringify(content));
-     setMessage('Toate modificările au fost salvate cu succes!');
-   setTimeout(() => setMessage(''), 3000);
+    setMessage('Toate modificările au fost salvate cu succes!');
+    setTimeout(() => setMessage(''), 3000);
   };
-
-  const renderContentTab = () => (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-bold text-text-primary">Editare Conținut Complet Site</h2>
-      
-      {/* Hero Section */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Secțiunea Hero (Homepage)</h3>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Titlu Principal Hero
-            </label>
-            <input
-              type="text"
-              value={content.heroTitle}
-              onChange={(e) => handleContentChange('heroTitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Subtitlu Hero
-            </label>
-            <textarea
-              value={content.heroSubtitle}
-              onChange={(e) => handleContentChange('heroSubtitle', e.target.value)}
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Services Page Content */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Pagina Services & Pricing</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Titlu Standard FBA
-            </label>
-            <input
-              type="text"
-              value={content.standardFBATitle}
-              onChange={(e) => handleContentChange('standardFBATitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Subtitlu Standard FBA
-            </label>
-            <input
-              type="text"
-              value={content.standardFBASubtitle}
-              onChange={(e) => handleContentChange('standardFBASubtitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Titlu FNSKU Labeling
-            </label>
-            <input
-              type="text"
-              value={content.fnSkuLabelingTitle}
-              onChange={(e) => handleContentChange('fnSkuLabelingTitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Titlu Private Label
-            </label>
-            <input
-              type="text"
-              value={content.privateLabelTitle}
-              onChange={(e) => handleContentChange('privateLabelTitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-text-primary mb-2">
-            Subtitlu Private Label
-          </label>
-          <textarea
-            value={content.privateLabelSubtitle}
-            onChange={(e) => handleContentChange('privateLabelSubtitle', e.target.value)}
-            rows={2}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-          />
-        </div>
-      </div>
-
-      {/* About Page Content */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Pagina About</h3>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Titlu About
-            </label>
-            <input
-              type="text"
-              value={content.aboutTitle}
-              onChange={(e) => handleContentChange('aboutTitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Subtitlu About
-            </label>
-            <textarea
-              value={content.aboutSubtitle}
-              onChange={(e) => handleContentChange('aboutSubtitle', e.target.value)}
-              rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Paragraful 1 - Our Story
-            </label>
-            <textarea
-              value={content.ourStoryP1}
-              onChange={(e) => handleContentChange('ourStoryP1', e.target.value)}
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Paragraful 2 - Our Story
-            </label>
-            <textarea
-              value={content.ourStoryP2}
-              onChange={(e) => handleContentChange('ourStoryP2', e.target.value)}
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Page Content */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Pagina Contact</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Titlu Contact
-            </label>
-            <input
-              type="text"
-              value={content.contactTitle}
-              onChange={(e) => handleContentChange('contactTitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Subtitlu Contact
-            </label>
-            <textarea
-              value={content.contactSubtitle}
-              onChange={(e) => handleContentChange('contactSubtitle', e.target.value)}
-              rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-      </div>
-
-      <button
-        onClick={handleSaveAll}
-        className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors flex items-center"
-      >
-        <Save className="w-5 h-5 mr-2" />
-        Salvează Tot Conținutul
-      </button>
-    </div>
-  );
 
   const handleContentChange = (field, value) => {
     setContent({
@@ -258,127 +49,110 @@ function SimpleAdminPanel() {
     });
   };
 
-  const renderPricingTab = () => (
+  const renderNavigationTab = () => (
     <div className="space-y-8">
-      <h2 className="text-2xl font-bold text-text-primary">Gestionare Prețuri</h2>
-      
-      {/* FBA Pricing */}
+      <h2 className="text-2xl font-bold text-text-primary">Navigație și Butoane</h2>
+
+      {/* Navigation & Buttons */}
       <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Prețuri FBA</h3>
+        <h3 className="text-lg font-semibold text-text-primary mb-4">Editare Navigație</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-text-primary mb-2">
-              Preț Standard FNSKU
+              Buton "Accueil"
             </label>
             <input
               type="text"
-              value={content.fnSkuStandard}
-              onChange={(e) => handleContentChange('fnSkuStandard', e.target.value)}
+              value={content.homeNav}
+              onChange={(e) => handleContentChange('homeNav', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-text-primary mb-2">
-              Preț Clienți Noi FNSKU
+              Buton "Services et Tarifs"
             </label>
             <input
               type="text"
-              value={content.fnSkuNewCustomer}
-              onChange={(e) => handleContentChange('fnSkuNewCustomer', e.target.value)}
+              value={content.servicesNav}
+              onChange={(e) => handleContentChange('servicesNav', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Buton "À Propos"
+            </label>
+            <input
+              type="text"
+              value={content.aboutNav}
+              onChange={(e) => handleContentChange('aboutNav', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Buton "Contact"
+            </label>
+            <input
+              type="text"
+              value={content.contactNav}
+              onChange={(e) => handleContentChange('contactNav', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Buton "Obtenir un Devis"
+            </label>
+            <input
+              type="text"
+              value={content.getQuoteBtn}
+              onChange={(e) => handleContentChange('getQuoteBtn', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Buton "Chat WhatsApp"
+            </label>
+            <input
+              type="text"
+              value={content.whatsappBtn}
+              onChange={(e) => handleContentChange('whatsappBtn', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Buton "Book Zoom"
+            </label>
+            <input
+              type="text"
+              value={content.bookZoomBtn}
+              onChange={(e) => handleContentChange('bookZoomBtn', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Link Zoom Meeting
+            </label>
+            <input
+              type="url"
+              value={content.zoomLink}
+              onChange={(e) => handleContentChange('zoomLink', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
             />
           </div>
         </div>
       </div>
-
-      {/* FBM Pricing */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Prețuri FBM</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Starter (0-999 units/month)
-            </label>
-            <input
-              type="text"
-              value={content.fbmStarter}
-              onChange={(e) => handleContentChange('fbmStarter', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Growth (1000-1999 units/month)
-            </label>
-            <input
-              type="text"
-              value={content.fbmGrowth}
-              onChange={(e) => handleContentChange('fbmGrowth', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Enterprise (2000+ units/month)
-            </label>
-            <input
-              type="text"
-              value={content.fbmEnterprise}
-              onChange={(e) => handleContentChange('fbmEnterprise', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Storage Pricing */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Prețuri Storage</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Storage per Pallet (per month)
-            </label>
-            <input
-              type="text"
-              value={content.storagePerPallet}
-              onChange={(e) => handleContentChange('storagePerPallet', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Climate Controlled (extra)
-            </label>
-            <input
-              type="text"
-              value={content.climateControlled}
-              onChange={(e) => handleContentChange('climateControlled', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-      </div>
-
-      <button
-        onClick={handleSaveAll}
-        className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors flex items-center"
-      >
-        <Save className="w-5 h-5 mr-2" />
-        Salvează Prețurile
-      </button>
-    </div>
-  );
-
-  const renderContactInfoTab = () => (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-bold text-text-primary">Informații Contact</h2>
       
       {/* Contact Information */}
       <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Date de Contact</h3>
-        <div className="space-y-4">
-         <div>
+        <h3 className="text-lg font-semibold text-text-primary mb-4">Informații Contact</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
             <label className="block text-sm font-medium text-text-primary mb-2">
               Telefon
             </label>
@@ -400,15 +174,15 @@ function SimpleAdminPanel() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
             />
           </div>
-           <div>
-           <label className="block text-sm font-medium text-text-primary mb-2">
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
               Adresă
             </label>
-             <textarea
-             value={content.address}
+            <textarea
+              value={content.address}
               onChange={(e) => handleContentChange('address', e.target.value)}
-               rows={2}
-             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+              rows={2}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
             />
           </div>
           <div>
@@ -424,97 +198,34 @@ function SimpleAdminPanel() {
           </div>
           <div>
             <label className="block text-sm font-medium text-text-primary mb-2">
-              Link Calendly
+              URL Logo
             </label>
             <input
               type="url"
-              value={content.calendlyLink}
-              onChange={(e) => handleContentChange('calendlyLink', e.target.value)}
+              value={content.logoUrl}
+              onChange={(e) => handleContentChange('logoUrl', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
             />
           </div>
         </div>
       </div>
-
+      
       <button
-         onClick={handleSaveAll}
-       className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors flex items-center"
+        onClick={handleSaveAll}
+        className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors flex items-center"
       >
         <Save className="w-5 h-5 mr-2" />
-         Salvează Informațiile de Contact
-     </button>
-    </div>
-  );
-
-  const renderSettingsTab = () => (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-bold text-text-primary">Setări Generale</h2>
-      
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-text-primary mb-4">Informații Site</h3>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Nume Site
-            </label>
-            <input
-              type="text"
-              defaultValue="Prep Center France"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Descriere SEO
-            </label>
-            <textarea
-              defaultValue="Professional Amazon FBA prep center in France. 24h turnaround, quality control, FNSKU labeling, polybagging & fast shipping to European Amazon fulfillment centers."
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Limba Implicită
-            </label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary">
-              <option value="fr">Français</option>
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-              <option value="it">Italiano</option>
-              <option value="es">Español</option>
-              <option value="ro">Română</option>
-            </select>
-          </div>
-        </div>
-        
-        <button className="mt-6 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors flex items-center">
-          <Save className="w-5 h-5 mr-2" />
-          Salvează Setările
-        </button>
-        
-        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h4 className="font-semibold text-blue-800 mb-2">Informații Admin:</h4>
-          <p className="text-sm text-blue-700">
-            <strong>Username:</strong> admin<br />
-            <strong>Parolă:</strong> PrepCenter2024!<br />
-            <strong>Acces:</strong> Permanent (nu expiră)
-          </p>
-        </div>
-      </div>
+        Salvează Toate Modificările
+      </button>
     </div>
   );
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'content':
-        return renderContentTab();
-      case 'pricing':
-        return renderPricingTab();
-      case 'settings':
-        return renderSettingsTab();
+      case 'navigation':
+        return renderNavigationTab();
       default:
-        return renderContentTab();
+        return renderNavigationTab();
     }
   };
 

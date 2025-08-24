@@ -44,8 +44,8 @@ export const AdminAuthProvider = ({ children }) => {
     const ADMIN_PASSWORD = 'PrepCenter2024!';
     
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Setez token-ul să nu expire niciodată (conform cererii tale)
-      const expiryTime = new Date().getTime() + (365 * 24 * 60 * 60 * 1000); // 1 an
+      // Setez token-ul să nu expire niciodată
+      const expiryTime = new Date().getTime() + (10 * 365 * 24 * 60 * 60 * 1000); // 10 ani
       
       localStorage.setItem('adminToken', 'admin-authenticated');
       localStorage.setItem('adminExpiry', expiryTime.toString());

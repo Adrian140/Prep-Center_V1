@@ -26,6 +26,7 @@ function Contact() {
         setMessage(result.error);
       }
       setFormData({ name: '', email: '', company: '', message: '' });
+      setFormData({ name: '', email: '', company: '', phone: '', message: '' });
     } catch (error) {
       setMessage(error.message || 'Eroare la trimiterea mesajului. Vă rugăm să încercați din nou.');
     }
@@ -115,6 +116,20 @@ function Contact() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-2">
+                    {t('phone')}
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder={t('phone')}
+                  />
+                </div>
+                <div>
                   <label htmlFor="message" className="block text-sm font-medium text-text-primary mb-2">
                     {t('message')} *
                   </label>
@@ -156,7 +171,7 @@ function Contact() {
                   {t('chatWhatsApp')}
                 </a>
                 <a
-                  href="https://calendly.com/global-fulfill-hub"
+                  href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-full bg-primary text-white py-4 px-6 rounded-lg font-semibold hover:bg-primary-dark transition-colors"

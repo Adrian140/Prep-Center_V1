@@ -26,13 +26,13 @@ function Header() {
           {/* Logo Section */}
           <div className="flex items-center space-x-3">
             <img 
-              src="https://content-studio.biela.dev/contain/40x40/i/content-studio/abc123/fba-prep-logistics-logo.png/fba-prep-logo.webp"
-              alt="FBA Prep Logistics Logo"
+              src="https://i.postimg.cc/30D2w6bm/logo.png" 
+              alt="FBA Prep Logistics Logo" 
               className="w-10 h-10 object-contain"
             />
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-text-primary leading-tight">Prep Center</span>
-              <span className="text-sm font-medium text-primary leading-tight">France</span>
+              <span className="text-xl font-bold text-text-primary leading-tight">FBA Prep</span>
+              <span className="text-sm font-medium text-primary leading-tight">Logistics</span>
             </div>
           </div>
           {/* Desktop Navigation */}
@@ -60,6 +60,8 @@ function Header() {
             <div className="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
               {isAdminAuthenticated ? (
                 <a
+              href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
+                href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
                   href="/admin-panel"
                   className="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-all duration-200 shadow-sm hover:shadow-md text-sm"
                 >

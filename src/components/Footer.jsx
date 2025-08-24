@@ -12,13 +12,15 @@ function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center">
-                <Package className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold text-text-primary">Prep Center France</span>
+              <img 
+                src="https://i.postimg.cc/30D2w6bm/logo.png" 
+                alt="FBA Prep Logistics Logo" 
+                className="w-10 h-10 object-contain"
+              />
+              <span className="text-xl font-bold text-text-primary">FBA Prep Logistics</span>
             </div>
             <p className="text-text-secondary mb-4">
-              Professional Amazon FBA prep center in France with 24h turnaround. Reception, quality control, FNSKU labeling, polybagging and fast shipping to European Amazon fulfillment centers. Serving EU sellers since 2020.
+              Professional Amazon FBA prep center with 24h turnaround. Reception, quality control, FNSKU labeling, polybagging and fast shipping to European Amazon fulfillment centers. Serving EU sellers since 2020.
             </p>
             <div className="flex space-x-4">
               <a
@@ -30,7 +32,7 @@ function Footer() {
                 WhatsApp
               </a>
               <a
-                href="https://calendly.com/global-fulfill-hub"
+                href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-dark transition-colors"
@@ -46,16 +48,16 @@ function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-text-secondary" />
-                <span className="text-text-secondary">{t('contactEmail')}</span>
+                <span className="text-text-secondary">contact@prep-center.eu</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 text-text-secondary" />
-                <span className="text-text-secondary">{t('contactPhone')}</span>
+                <span className="text-text-secondary">+33 6 75 11 62 18</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 text-text-secondary mt-1" />
                 <span className="text-text-secondary">
-                  {t('contactAddress')}
+                  35350 La Gouesnière, France
                 </span>
               </div>
             </div>
