@@ -13,7 +13,7 @@ function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="https://i.postimg.cc/30D2w6bm/logo.png" 
+                src="https://postimg.cc/YjWH7RCH/logo.png" 
                 alt="FBA Prep Logistics Logo" 
                 className="w-10 h-10 object-contain"
               />
