@@ -12,10 +12,10 @@ export const useLanguage = () => {
 
 export const languages = {
   fr: { name: 'Français', flag: '��🇷' },
-  en: { name: 'English', flag: '🇬🇧' },
+  en: { name: 'English', flag: '🇬��' },
   de: { name: 'Deutsch', flag: '🇩🇪' },
   it: { name: 'Italiano', flag: '🇮🇹' },
-  es: { name: 'Español', flag: '🇪🇸' },
+  es: { name: 'Español', flag: '🇪��' },
   ro: { name: 'Română', flag: '🇷🇴' }
 };
 

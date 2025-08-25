@@ -60,9 +60,8 @@ function Header() {
             <div className="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
               {isAdminAuthenticated ? (
                 <a
-              href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
                 href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
-                  href="/admin-panel"
+                href="/admin-panel"
                   className="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-all duration-200 shadow-sm hover:shadow-md text-sm"
                 >
                   Admin Panel

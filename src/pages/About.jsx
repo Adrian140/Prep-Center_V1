@@ -127,7 +127,6 @@ function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
               href="/contact"
               className="bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-dark transition-colors text-center"
             >

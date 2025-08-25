@@ -82,9 +82,7 @@ function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="https://us04web.zoom.us/j/7184050116?pwd=zaaAe2ANnKbXNTGp7f8DebRbtY4LKD.1"
               href="/contact"
-              className="w-full sm:w-auto bg-white text-primary px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors text-center"
               className="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-dark transition-colors text-center"
             >
                 {t('getQuote')}
@@ -93,7 +91,6 @@ function Home() {
                 href="https://wa.me/33675116218"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto bg-accent text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent-dark transition-colors text-center"
                 className="w-full sm:w-auto bg-accent text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent-dark transition-colors text-center"
               >
                 {t('chatWhatsApp')}
