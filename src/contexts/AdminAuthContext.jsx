@@ -14,24 +14,53 @@ export const AdminAuthProvider = ({ children }) => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Verifică dacă admin-ul este deja autentificat la încărcarea paginii
   useEffect(() => {
-    const adminToken = localStorage.getItem('adminToken');
-    const adminExpiry = localStorage.getItem('adminExpiry');
+    checkAuthStatus();
     
-    if (adminToken && adminExpiry) {
-      const now = new Date().getTime();
-      const expiryTime = parseInt(adminExpiry);
-      
-      if (now < expiryTime) {
-        setIsAdminAuthenticated(true);
-      } else {
-        // Token expirat, șterge-l
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminExpiry');
+    // Deconectare automată la închiderea tab-ului/browser-ului
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem('adminAuth');
+      setIsAdminAuthenticated(false);
+    };
+
+    // Deconectare automată la schimbarea tab-ului
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        sessionStorage.removeItem('adminAuth');
+        setIsAdminAuthenticated(false);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  const checkAuthStatus = () => {
+    const authData = sessionStorage.getItem('adminAuth');
+    
+    if (authData) {
+      try {
+        const { timestamp } = JSON.parse(authData);
+        const now = Date.now();
+        
+        // Session expires after 1 hour
+        if (now - timestamp < 3600000) {
+          setIsAdminAuthenticated(true);
+        } else {
+          sessionStorage.removeItem('adminAuth');
+          setIsAdminAuthenticated(false);
+        }
+      } catch (error) {
+        sessionStorage.removeItem('adminAuth');
+        setIsAdminAuthenticated(false);
       }
     }
-  }, []);
+  };
 
   const adminLogin = async (username, password) => {
     setLoading(true);
@@ -39,17 +68,18 @@ export const AdminAuthProvider = ({ children }) => {
     // Simulez o întârziere pentru autentificare
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Credențiale admin (în producție, acestea ar trebui să fie în backend)
+    // Credențiale admin locale
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'PrepCenter2024!';
     
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Setez token-ul să nu expire niciodată
-      const expiryTime = new Date().getTime() + (10 * 365 * 24 * 60 * 60 * 1000); // 10 ani
+      const authData = {
+        username,
+        password,
+        timestamp: Date.now()
+      };
       
-      localStorage.setItem('adminToken', 'admin-authenticated');
-      localStorage.setItem('adminExpiry', expiryTime.toString());
-      
+      sessionStorage.setItem('adminAuth', JSON.stringify(authData));
       setIsAdminAuthenticated(true);
       setLoading(false);
       return { success: true };
@@ -60,8 +90,7 @@ export const AdminAuthProvider = ({ children }) => {
   };
 
   const adminLogout = () => {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminExpiry');
+    sessionStorage.removeItem('adminAuth');
     setIsAdminAuthenticated(false);
   };
 

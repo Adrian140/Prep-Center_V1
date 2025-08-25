@@ -1,10 +1,6 @@
-// Simple contact form handler - no external dependencies needed
+// Contact form handler with Formspree integration
 export const sendContactEmail = async (formData) => {
   try {
-    // Simulăm trimiterea cu succes pentru demo
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // În producție, aici ar fi API-ul real
     const response = await fetch("https://formspree.io/f/xandwobv", {
       method: "POST",
       headers: {
@@ -13,19 +9,22 @@ export const sendContactEmail = async (formData) => {
       body: JSON.stringify({
         name: formData.name,
         email: formData.email,
-        company: formData.company,
-        message: formData.message,
+        company: formData.company || "Nu a fost specificat",
         phone: formData.phone || "Nu a fost specificat",
+        message: formData.message,
         _replyto: formData.email,
         _subject: `Mesaj nou de la ${formData.name} - FBA Prep Logistics`
       })
     });
 
-    // Pentru demo, returnăm întotdeauna succes
-    return { 
-      success: true, 
-      message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." 
-    };
+    if (response.ok) {
+      return { 
+        success: true, 
+        message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." 
+      };
+    } else {
+      throw new Error("Eroare la trimiterea mesajului");
+    }
   } catch (error) {
     console.error("Contact Form Error:", error);
     return { 

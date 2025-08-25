@@ -94,7 +94,6 @@ function App() {
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/register" />
             <Route path="/admin-login" element={<AdminLoginForm />} />
-            <Route path="/admin-panel" element={<SimpleAdminPanel />} />
             <Route path="/admin-info" element={<AdminLoginInfo />} />
             <Route path="/admin" element={
               <AdminRoute>

@@ -8,6 +8,27 @@ function AdminRoute({ children }) {
 
   useEffect(() => {
     checkAuthentication();
+    
+    // Deconectare automată la închiderea tab-ului/browser-ului
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem('adminAuth');
+    };
+
+    // Deconectare automată la schimbarea tab-ului
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        sessionStorage.removeItem('adminAuth');
+        setIsAuthenticated(false);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   const checkAuthentication = async () => {
@@ -16,10 +37,17 @@ function AdminRoute({ children }) {
       const authData = sessionStorage.getItem('adminAuth');
       
       if (authData) {
-        const { username, password } = JSON.parse(authData);
-        await verifyCredentials(username, password);
+        const { username, password, timestamp } = JSON.parse(authData);
+        const now = Date.now();
+        
+        // Session expires after 1 hour of inactivity
+        if (now - timestamp < 3600000) {
+          await verifyCredentials(username, password);
+        } else {
+          sessionStorage.removeItem('adminAuth');
+          promptForCredentials();
+        }
       } else {
-        // Prompt for credentials
         promptForCredentials();
       }
     } catch (error) {
@@ -29,8 +57,8 @@ function AdminRoute({ children }) {
   };
 
   const promptForCredentials = () => {
-    const username = prompt('Username:');
-    const password = prompt('Password:');
+    const username = prompt('Username Admin:');
+    const password = prompt('Parolă Admin:');
     
     if (username && password) {
       verifyCredentials(username, password);
@@ -42,29 +70,28 @@ function AdminRoute({ children }) {
 
   const verifyCredentials = async (username, password) => {
     try {
-      const credentials = btoa(`${username}:${password}`);
+      // Credențiale admin locale
+      const ADMIN_USERNAME = 'admin';
+      const ADMIN_PASSWORD = 'PrepCenter2024!';
       
-      const response = await fetch('/api/admin-auth', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Basic ${credentials}`,
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        // Store credentials for session
-        sessionStorage.setItem('adminAuth', JSON.stringify({ username, password }));
+      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        // Store credentials with timestamp for session management
+        const authData = {
+          username,
+          password,
+          timestamp: Date.now()
+        };
+        sessionStorage.setItem('adminAuth', JSON.stringify(authData));
+        
         setIsAuthenticated(true);
         setError('');
       } else {
-        setError('Credențiale invalide');
-        // Clear any stored auth
+        setError('Username sau parolă incorectă');
         sessionStorage.removeItem('adminAuth');
         setTimeout(promptForCredentials, 1000);
       }
     } catch (error) {
-      setError('Eroare de conectare la server');
+      setError('Eroare de autentificare');
       console.error('Auth error:', error);
     } finally {
       setIsLoading(false);

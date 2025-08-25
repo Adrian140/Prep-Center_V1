@@ -81,12 +81,14 @@ function Home() {
               {t('heroSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              className="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-dark transition-colors text-center"
+                {t('getQuote')}
             <a
               href="/contact"
-              className="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-dark transition-colors text-center"
+              className="bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-dark transition-colors text-center"
             >
-                {t('getQuote')}
-              </a>
+              {t('getStartedToday')}
+            </a>
               <a
                 href="https://wa.me/33675116218"
                 target="_blank"
@@ -293,9 +295,12 @@ function Home() {
             {t('readyStreamlineSubtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="w-full sm:w-auto bg-white text-primary px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl">
+            <a
+              href="/contact"
+              className="w-full sm:w-auto bg-white text-primary px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+            >
               {t('getQuote')}
-            </button>
+            </a>
             <a
               href="https://wa.me/33675116218"
               target="_blank"
