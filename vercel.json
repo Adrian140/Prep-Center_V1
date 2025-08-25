@@ -1,5 +1,15 @@
 {
+  "functions": {
+    "src/pages/admin.js": {
+      "maxDuration": 10
+    }
+  },
   "routes": [
+    {
+      "src": "/admin",
+      "dest": "/admin.html",
+      "status": 200
+    },
     {
       "src": "/[^.]+",
       "dest": "/",

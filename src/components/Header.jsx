@@ -26,13 +26,13 @@ function Header() {
           {/* Logo Section */}
           <div className="flex items-center space-x-3">
             <img 
-              src="https://i.postimg.cc/YjWH7RCH/logo.png" 
+              src="https://i.postimg.cc/9zLyQFZx/Chat-GPT-Image-25-aug-2025-01-47-38.png" 
               alt="FBA Prep Logistics Logo" 
-              className="w-10 h-10 object-contain"
+              className="w-20 h-20 object-contain"
             />
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-text-primary leading-tight">FBA Prep</span>
-              <span className="text-sm font-medium text-primary leading-tight">Logistics</span>
+              <span className="text-lg font-bold text-text-primary leading-tight">FBA Prep</span>
+              <span className="text-xs font-medium text-primary leading-tight">Logistics</span>
             </div>
           </div>
           {/* Desktop Navigation */}

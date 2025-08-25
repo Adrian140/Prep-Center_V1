@@ -14,6 +14,8 @@ import TermsOfService from './components/TermsOfService';
 import AdminLoginInfo from './components/AdminLoginInfo';
 import AdminLoginForm from './components/auth/AdminLoginForm';
 import SimpleAdminPanel from './components/admin/SimpleAdminPanel';
+import Admin from './pages/Admin';
+import AdminRoute from './components/AdminRoute';
 function App() {
   return (
     <LanguageProvider>
@@ -94,6 +96,11 @@ function App() {
             <Route path="/admin-login" element={<AdminLoginForm />} />
             <Route path="/admin-panel" element={<SimpleAdminPanel />} />
             <Route path="/admin-info" element={<AdminLoginInfo />} />
+            <Route path="/admin" element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            } />
           </Routes>
         </main>
         <Footer />
