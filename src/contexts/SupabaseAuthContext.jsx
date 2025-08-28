@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { supabase, supabaseHelpers } from '../config/supabase';
-
 const SupabaseAuthContext = createContext();
 
 export const useSupabaseAuth = () => {
@@ -18,156 +16,65 @@ export const SupabaseAuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        loadUserProfile(session.user.id);
-      }
-      setLoading(false);
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          await loadUserProfile(session.user.id);
-        } else {
-          setProfile(null);
-        }
-        setLoading(false);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
+     // Supabase disabled - using mock authentication
+    setLoading(false);
+ }, []);
 
   const loadUserProfile = async (userId) => {
-    try {
-      const { data, error } = await supabaseHelpers.getProfile(userId);
-      if (error && error.code !== 'PGRST116') { // Not found error
-        console.error('Error loading profile:', error);
-      } else if (data) {
-        setProfile(data);
-      }
-    } catch (error) {
-      console.error('Error loading profile:', error);
-    }
-  };
+     // Mock profile loading
+    const mockProfile = {
+      id: userId,
+      first_name: 'Demo',
+      last_name: 'User',
+      email: 'demo@example.com'
+    };
+    setProfile(mockProfile);
+ };
 
   const signUp = async (email, password, userData = {}) => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabaseHelpers.signUp(email, password, userData);
-      
-      if (error) {
-        return { success: false, error: error.message };
-      }
-
-      // Create profile record
-      if (data.user) {
-        const profileData = {
-          id: data.user.id,
-          email: data.user.email,
-          first_name: userData.firstName || '',
-          last_name: userData.lastName || '',
-          account_type: userData.accountType || 'individual',
-          company_name: userData.companyName || null,
-          cui: userData.cui || null,
-          vat_number: userData.vatNumber || null,
-          company_address: userData.companyAddress || null,
-          company_city: userData.companyCity || null,
-          company_postal_code: userData.companyPostalCode || null,
-          phone: userData.phone || null,
-          country: userData.country || 'FR',
-          language: userData.language || 'fr'
-        };
-
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([profileData]);
-
-        if (profileError) {
-          console.error('Error creating profile:', profileError);
-        }
-      }
-
-      return { 
-        success: true, 
-        message: 'Contul a fost creat cu succes! Verifică email-ul pentru confirmare.' 
-      };
-    } catch (error) {
-      return { success: false, error: error.message };
-    } finally {
-      setLoading(false);
-    }
-  };
+     // Mock sign up - Supabase disabled
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setLoading(false);
+    return { 
+      success: false, 
+      error: 'Supabase integration disabled. Please use regular authentication.' 
+    };
+ };
 
   const signIn = async (email, password) => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabaseHelpers.signIn(email, password);
-      
-      if (error) {
-        return { success: false, error: error.message };
-      }
-
-      return { success: true, user: data.user };
-    } catch (error) {
-      return { success: false, error: error.message };
-    } finally {
-      setLoading(false);
-    }
-  };
+     // Mock sign in - Supabase disabled
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setLoading(false);
+    return { 
+      success: false, 
+      error: 'Supabase integration disabled. Please use regular authentication.' 
+    };
+ };
 
   const signOut = async () => {
-    try {
-      const { error } = await supabaseHelpers.signOut();
-      if (error) {
-        console.error('Error signing out:', error);
-      }
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
+     // Mock sign out
+    setUser(null);
+    setProfile(null);
+    setSession(null);
+ };
 
   const resetPassword = async (email) => {
-    try {
-      const { error } = await supabaseHelpers.resetPassword(email);
-      
-      if (error) {
-        return { success: false, error: error.message };
-      }
-
-      return { 
-        success: true, 
-        message: 'Link-ul de resetare a fost trimis pe email.' 
-      };
-    } catch (error) {
-      return { success: false, error: error.message };
-    }
-  };
+     // Mock password reset
+    return { 
+      success: false, 
+      error: 'Supabase integration disabled. Please contact support for password reset.' 
+    };
+ };
 
   const updateProfile = async (updates) => {
-    try {
-      if (!user) return { success: false, error: 'Nu ești autentificat' };
-
-      const { data, error } = await supabaseHelpers.updateProfile(user.id, updates);
-      
-      if (error) {
-        return { success: false, error: error.message };
-      }
-
-      setProfile(data);
-      return { success: true, data };
-    } catch (error) {
-      return { success: false, error: error.message };
-    }
-  };
+     // Mock profile update
+    if (!user) return { success: false, error: 'Nu ești autentificat' };
+    
+    setProfile({ ...profile, ...updates });
+    return { success: true, data: { ...profile, ...updates } };
+ };
 
   const value = {
     user,

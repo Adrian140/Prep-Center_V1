@@ -21,7 +21,6 @@ TXT    _dmarc            "v=DMARC1; p=none; rua=mailto:admin@prep-center.eu; ruf
 **TOATE CONFIGURAȚIILE SUNT CORECTE:**
 - ✅ Website va funcționa pe prep-center.eu
 - ✅ Website va funcționa pe www.prep-center.eu
-- ✅ Email va funcționa pe admin@prep-center.eu
 - ✅ SSL va fi generat automat de Vercel
 - ✅ DNS only (nu Proxied) - perfect pentru Vercel
 
@@ -89,7 +88,7 @@ După lansare, testează:
 - WhatsApp: +33 6 75 11 62 18
 - Formularul de contact
 
-## �� DACĂ ÎNTÂMPINI PROBLEME:
+## 🚨 DACĂ ÎNTÂMPINI PROBLEME:
 
 **SSL nu se generează:**
 - Așteaptă 15 minute

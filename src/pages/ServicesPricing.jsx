@@ -206,6 +206,23 @@ function ServicesPricing() {
                 </div>
               </div>
             </div>
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-xl font-semibold text-text-primary mb-4">Multi-Platform FBM</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-text-secondary">Amazon FBM Orders</span>
+                  <span className="font-medium text-primary">€1.20 / order</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-text-secondary">eBay Integration</span>
+                  <span className="font-medium text-primary">€1.30 / order</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-text-secondary">Shopify/Website Orders</span>
+                  <span className="font-medium text-primary">€1.40 / order</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         {/* FBM Shipping Rates */}
